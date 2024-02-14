@@ -1,0 +1,4 @@
+Para inicializar el servidor de php se utiliza:
+php -S localhost:3000
+Despues de poner la url, agregas: 
+/nombre_del_archivo
