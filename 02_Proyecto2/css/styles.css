@@ -1,0 +1,315 @@
+:root{
+
+    --primario: #9C27B0;
+    --primarioObsucuro: #89119D;
+    --secundario: #FFCE00;
+    --secundarioObscuro: rgb(233,287,2);
+    --blanco: #FFF;
+    --negro: #000;
+
+    --fuentePrincipal:'Staatliches', cursive;
+
+}
+
+
+html{
+    box-sizing: border-box; 
+    font-size: 62.5%;   /* Hack para los rems */
+}
+
+
+/*     Hack para el rem     */
+*, *:before, *:after{
+    box-sizing: inherit; 
+}
+/*     Fin del rem      */
+
+/*   GLOBALES  */
+
+body{
+    background-color: var(--primario);     /* Color del fondo */
+    font-size: 1.6rem;      /* Tamaño de la fuente */
+    line-height: 1.5;   /* Interlineado */
+
+}
+
+p{
+    font-size: 1.8rem;
+    font-family: Arial, Helvetica, sans-serif;   /* Tipo de letra */
+    color: var(--blanco);
+}
+
+a{
+    text-decoration: none;    /* Borrar la linea de links*/
+}
+
+img{
+    width: 100%;
+}
+
+.contenedor{
+    max-width: 120rem;    /* Ancho maximo*/
+    margin: 0 auto;       /* Centrado */
+}
+
+h1,h2,h3{
+    text-align: center;    /* Alinear el texto */
+    color: var(--secundario);
+    font-family: var(--fuentePrincipal);
+}
+
+h1{
+    font-size: 4rem;
+}
+
+h2{
+    font-size: 3.2rem;
+}
+
+h3{
+    font-size: 2.4rem;
+}
+
+/* header */
+
+.header{
+display: flex;      /*Uso de flexbox*/
+justify-content: center;   /* Centar horizontalemente el flexbox*/
+}
+
+.header__logo{
+    margin: 3rem 0;    /* Margen del top del logo*/
+}
+
+/*Navegacion*/
+.navegacion{
+    background-color: var(--primarioObsucuro);
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;     /*Separar dos elementos*/
+}
+
+.navegacion__enlace{
+    font-family: var(--fuentePrincipal);
+    color: var(--blanco);
+    font-size: 3rem;
+
+}
+
+.navegacion__enlace--activo,
+.navegacion__enlace:hover{ /* Hover: cuando pase el mouse*/
+    color: var(--secundario);
+}
+
+
+/* Footer */
+.footer{
+
+    background-color: var(--primarioObsucuro);
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.footer__texto{
+
+    text-align: center;
+    font-family: var(--fuentePrincipal);
+    font-size: 2.2rem;
+}
+
+
+/* Grid */
+
+.grid{
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr); /* Se seccionen en dos*/
+    gap: 2rem;
+
+}
+
+@media (min-width: 768px){
+    .grid{
+
+        grid-template-columns: repeat(3,1fr); /* Se seccionen en 3*/
+
+    }
+    
+}
+/* Productos */
+.producto{
+
+    background-color: var(--primarioObsucuro); /* Color de fondo*/
+    padding: 1rem; 
+
+}
+
+
+.producto__nombre{
+
+    font-size: 4rem;
+
+}
+
+.producto__precio{
+
+    font-size: 2.8rem;
+    color: var(--secundario);
+
+}
+
+.producto__nombre,
+.producto__precio{
+    font-family: var(--fuentePrincipal);
+    margin: 1rem 0;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Graficos */
+
+
+.grafico{
+
+    min-height: 30rem;   /* Altura minima */
+    background-repeat: no-repeat;   /* La imagen no se repita doble vez*/
+    background-size: cover;  /* La imagen cubra todo el cuadro*/
+    grid-column: 1 / 3; /* camisas y node ocupan el mismo comando*/
+
+}
+.grafico--camisas{
+
+    grid-row: 2 / 3;
+    background-image: url(../img/grafico1.jpg);
+
+}
+
+.grafico--node{
+    background-image: url(../img/grafico2.jpg);
+    grid-row: 8 / 9;
+}
+
+
+@media (min-width: 768px){
+    
+    .grafico--node{
+        grid-row: 5 / 6; 
+        grid-column: 2 / 4;
+    }
+
+}
+
+/* NOSOTROS */
+
+.nosotros{
+    display: grid;
+    grid-template-rows:repeat(2,auto) ;/* Automaticamente se rellene*/
+
+}
+@media (min-width: 768px){
+    .nosotros{
+        grid-template-columns: repeat(2,1fr);   /* Definir en cuanto se va a partir el grid*/
+        column-gap: 2rem;    /* Separacion de 2 items */
+    }
+    
+}
+
+.nosotros__imagen{
+
+    grid-row: 1 / 2;
+}
+
+@media (min-width: 768px){
+    .nosotros__imagen{
+        grid-column: 2 / 3;
+    }
+}
+
+/* Bloques */
+.bloques{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2rem;
+}
+
+.bloque{
+
+    text-align: center;
+
+}
+
+.bloque__titulo{
+
+    margin: 0;
+
+}
+
+
+
+@media (min-width: 768px){
+    .bloques{
+        grid-template-columns: repeat(4,1fr);
+    }
+    
+}
+
+/* Pagina del producto */
+
+@media (min-width: 768px){
+    .camisa{
+
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        column-gap: 2rem;
+    }
+}
+
+
+/*.camisa__contenido{
+
+} */
+
+.formulario{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2rem;
+
+
+}
+
+.formulario__campo{
+   /* border-color: var(--primarioObsucuro); /*Tenga un bordecito 
+    border-width: 1rem; /*Tamaño del borde 
+    border-style: solid; /*Linea solida*/
+
+    /*Es lo mismo a lo de arriba*/
+    border: 1rem solid var(--primarioObsucuro); /*ancho estilo color*/
+    background-color: transparent;
+    color: var(--blanco);
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem;
+    appearance: none;  /* Quita la flecha de seleccionar talla*/
+    
+}
+
+.formulario__submit{
+    background-color: var(--secundario);
+    border: none;  /* Quitarle el borde*/
+    font-size: 2rem;
+    font-family: var(--fuentePrincipal);
+    padding: 2rem;
+    transition: background-color .3s ease;  /*Transicion para que tenga degradado el boton*/
+    grid-column: 1 / 3;
+    margin: 0 2rem;
+    border-radius: 1rem;
+
+}
+
+.formulario__submit:hover{
+    cursor: pointer; /* Aparezca la manita para seleccionar */
+    background-color: var(--secundarioObscuro);
+   
+    
+}

@@ -1,0 +1,322 @@
+:root{
+    --fuenteHeading: 'PT Sans', sans-serif;
+    --fuenteParrafos: 'Open Sans', sans-serif;
+
+    --primario: #784d3c;
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --gris: #e1e1e1;
+
+}
+
+html{
+    box-sizing: border-box; /*Borde y padding no afente ancho de los elementos*/
+    font-size: 62.5%; /* 1REM = 10px*/
+}
+
+*, *:before, *:after{
+    box-sizing: inherit; /*Borde y padding*/
+}
+
+body{
+    font-family: var(--fuenteParrafos);
+    font-size: 1.6rem;
+    line-height: 2; /* Interlineado */
+}
+
+/* Golables */
+
+.contenedor{
+    width: min(90%, 120rem);
+    margin: 0 auto;
+
+}
+
+a{
+    text-decoration: none; /*Quitar interlineados de los enlaces*/
+
+}
+
+h1,h2,h3,h4{
+    font-family: var(--fuenteHeading);
+}
+
+h1{
+    font-size: 4.8rem;
+}
+
+h2{
+    font-size: 4rem;
+}
+
+h3{
+    font-size: 3.2rem;
+}
+
+h4{
+    font-size: 2.8rem;
+}
+
+img{
+    max-width: 100%;
+}
+
+/* Utilidades */
+.no-margin{
+    margin: 0; /* Elimina el margen que viene por defecto*/
+}
+
+.no-padding{
+    padding: 0;
+}
+
+.centrar-texto{
+    text-align: center;
+}
+
+/* Header */
+.header{
+
+    background-image: url(../img/banner.jpg);   /*Imagen de fondo*/
+    height: 60rem; /* Altura de la imagen */
+    background-size: cover; /* Cubra todo la imagen */
+    background-repeat: no-repeat;
+    background-position: center center; /* La imagen fluye hacia el centro  El primero es del horizontal y segundo del vertical*/
+
+}
+
+.header__texto{
+    text-align: center;
+    color: var(--blanco);
+    margin-top: 5rem;
+}
+
+@media (min-width: 768px){
+    .header__texto{
+        margin: 15rem;
+    }
+}
+
+
+.barra{
+    padding-top:  4rem;
+}
+
+@media (min-width: 768px){
+    .barra{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.logo{
+    color: var(--blanco);
+}
+
+.logo__nombre{
+    font-weight: normal;
+
+}
+
+.logo__bold{
+
+    font-weight: 700;
+
+}
+
+@media (min-width: 768px){
+    .navegacion{
+        display: flex;
+        gap: 2rem;
+    }
+}
+
+.navegacion__enlace{
+    display: block; /* Elementos uno debajo del otro*/
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--blanco);
+}
+
+/* Fin header */
+
+
+/* Contenido Principal */
+
+@media (min-width: 768px){
+    .contenido-principal{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 4rem;
+    }
+}
+
+.entrada{
+    border-bottom: 1px solid var(--gris); /* Añadir borde */
+    margin-bottom: 2rem ;
+}
+
+.entrada:last-of-type{   /* Selecciona la ultima entrada*/
+    border:none;
+    margin-bottom: 0;
+}
+
+.boton{
+    display: block; /*Toma todo el espacio del ancho */
+    font-family: var(--fuenteHeading);
+    color: var(--blanco);
+    text-align: center;
+    padding: 1rem 3rem;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    border: none;
+    
+}
+
+.boton:hover{
+    cursor: pointer;
+}
+
+@media (min-width: 768px){
+    .boton{
+        display: inline-block;  /* Inline-block: Tomar el espacio que requiere y respeta los margenes */
+
+    }
+}
+
+.boton--primario{
+    background-color: var(--negro);
+}
+
+.boton--secundario{
+
+    background-color: var(--primario);
+}
+
+.cursos{
+    list-style: none;    /* Quitar las biñetas */
+}
+
+.widget-curso__label{
+    font-family: var(--fuenteHeading);
+    font-weight:bold
+}
+
+.widget-curso__info{
+    font-weight: 400;
+}
+
+.widget-curso{
+    border-bottom: 1px solid var(--gris);
+    margin-bottom: 2rem;
+}
+
+.widget-curso:last-of-type{
+    border: none;
+    margin-bottom: 0;
+}
+
+.widget-info,
+.widget-curso__label{
+    font-size: 2rem;
+}
+
+.footer{
+    background-color: var(--negro);
+    padding-bottom: 3rem;
+    margin-top: 4rem;
+}
+
+@media (min-width: 768px){
+    .sobre-nosotros{
+        display: flex;
+        gap: 2rem;
+    }
+
+    .sobre-nosotros__imagen,
+    .sobre-nosotros__texto{
+        flex-basis: 50%;  /*Se pongan al 50%*/
+    }
+}
+
+.curso{
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--gris);
+}
+
+.curso:last-of-type{
+    border: none;
+}
+
+@media (min-width: 768px){
+    .curso{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        column-gap: 2rem;
+    }
+}
+
+
+
+/* Codigo duplicado */
+.curso__label{
+    font-family: var(--fuenteHeading);
+    font-weight:bold
+}
+
+.curso__info{
+    font-weight: 400;
+}
+
+.curso__info,
+.curso__label{
+    font-size: 2rem;
+}
+
+/* Contacto */
+
+.contacto__bg{
+    background-image: url(../img/contacto.jpg);
+    height: 40rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.formulario{
+
+    background-color: var(--blanco);
+    margin: -5rem auto 0 auto;
+    width: 95%;
+    padding: 5rem;
+
+}
+
+.campo{
+
+    display: flex;
+    margin-bottom: 2rem;
+    gap: 2rem;
+
+}
+
+.campo__label{
+    flex: 0 0 9rem;
+    text-align: right;
+  
+}
+
+.campo__field{
+
+    flex: 1;
+    border: 1px solid var(--gris);
+}
+
+.campo__field--textarea{
+
+    height: 20rem;
+}
+
