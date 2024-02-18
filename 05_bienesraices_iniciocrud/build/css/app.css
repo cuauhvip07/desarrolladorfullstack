@@ -622,6 +622,10 @@ template {
   margin-bottom: 0;
 }
 
+.informacion-meta span {
+  color: #E08709;
+}
+
 .texto-entrada a {
   color: #000000;
   display: block;
@@ -643,9 +647,6 @@ template {
   height: 0.5rem;
   background-color: #71B100;
   margin-top: 1rem;
-}
-.texto-entrada span {
-  color: #E08709;
 }
 
 .testimonial {
