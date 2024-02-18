@@ -368,7 +368,7 @@ template {
 }
 
 .contenido-centrado {
-  max-width: 800px;
+  max-width: 80rem;
 }
 
 .ver-todas {
@@ -538,6 +538,12 @@ template {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+.precio {
+  color: #71B100;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
 .anuncio {
   background-color: #eeeeee;
   border: 1px solid #c8c8c8;
@@ -548,16 +554,12 @@ template {
 .anuncio h3, .anuncio p {
   margin: 0;
 }
-.anuncio .precio {
-  color: #71B100;
-  font-weight: bold;
-  font-size: 3rem;
-}
 
 .iconos-caracteristicas {
   display: flex;
   list-style: none;
   padding: 0;
+  max-width: 40rem;
 }
 .iconos-caracteristicas li {
   flex: 1;
