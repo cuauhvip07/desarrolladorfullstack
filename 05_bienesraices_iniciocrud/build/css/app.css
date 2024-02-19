@@ -386,9 +386,11 @@ template {
   margin-top: 2.5rem;
   display: block;
   transition: background-color 0.5s ease;
+  border: none;
 }
 .boton-amarillo-block:hover {
   background-color: #c77808;
+  cursor: pointer;
 }
 
 .boton-amarillo {
@@ -401,9 +403,11 @@ template {
   margin-top: 2.5rem;
   display: inline-block;
   transition: background-color 0.5s ease;
+  border: none;
 }
 .boton-amarillo:hover {
   background-color: #c77808;
+  cursor: pointer;
 }
 
 .boton-verde {
@@ -416,9 +420,11 @@ template {
   margin-top: 2.5rem;
   display: inline-block;
   transition: background-color 0.5s ease;
+  border: none;
 }
 .boton-verde:hover {
   background-color: #619800;
+  cursor: pointer;
 }
 
 .footer {
@@ -673,6 +679,45 @@ template {
 .testimonial p {
   text-align: right;
   color: #FFFFFF;
+}
+
+.formulario p {
+  font-size: 1.4rem;
+  color: #333333;
+  margin: 2rem 0 0 0;
+}
+.formulario legend {
+  font-size: 2rem;
+  color: #333333;
+}
+.formulario label {
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+}
+.formulario input:not([type=submit]),
+.formulario textarea,
+.formulario select {
+  padding: 1rem;
+  display: block;
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #e1e1e1;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+}
+.formulario textarea {
+  height: 20rem;
+}
+.formulario .forma-contacto {
+  max-width: 30rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.formulario input[type=radio] {
+  margin: 0;
+  width: auto;
 }
 
 @media (min-width: 768px) {
