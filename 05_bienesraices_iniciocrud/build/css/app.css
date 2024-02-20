@@ -427,6 +427,39 @@ template {
   cursor: pointer;
 }
 
+.dark-mode {
+  background-color: #1a1a1a;
+}
+.dark-mode p, .dark-mode blockquote {
+  color: #FFFFFF;
+}
+.dark-mode a, .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+  color: #e1e1e1;
+}
+.dark-mode .anuncio,
+.dark-mode .resumen-propiedad {
+  background-color: #333333;
+  border: 1px solid #333333;
+}
+.dark-mode .anuncio .precio,
+.dark-mode .resumen-propiedad .precio {
+  color: #71B100;
+}
+.dark-mode .anuncio .icono,
+.dark-mode .resumen-propiedad .icono {
+  filter: invert(100%);
+}
+.dark-mode .formulario label, .dark-mode .formulario legend, .dark-mode .formulario p {
+  color: #e1e1e1;
+}
+.dark-mode .formulario input:not([type=submit]),
+.dark-mode .formulario textarea,
+.dark-mode .formulario select {
+  background-color: #333333;
+  color: #FFFFFF;
+  border: 1px solid #333333;
+}
+
 .footer {
   background-color: #333333;
   padding: 2.5rem;
@@ -434,6 +467,11 @@ template {
 }
 .footer .contenedor-footer {
   padding-top: 2.5rem;
+}
+.footer .navegacion {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
 }
 .footer .copyright {
   color: #FFFFFF;
@@ -481,27 +519,58 @@ template {
   max-width: 60rem;
 }
 
-.barra {
+.derecha {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media (min-width: 768px) {
+  .derecha {
+    align-items: flex-end;
+  }
+}
+.derecha .dark-mode-boton {
+  width: 3rem;
+  margin: 3rem 0;
+  filter: invert(100%);
+}
+.derecha .dark-mode-boton:hover {
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .derecha .dark-mode-boton {
+    margin-top: 0;
+  }
+}
+
+.barra {
+  display: flex;
+  flex-direction: column;
   padding-top: 3rem;
+  align-items: center;
+}
+.barra img {
+  width: 20rem;
+  height: 3rem;
+  margin-bottom: 3rem;
 }
 @media (min-width: 768px) {
   .barra {
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
   }
   .barra img {
-    width: 100%;
-    height: 10rem;
+    width: 30rem;
+    height: 3rem;
   }
 }
 
 .navegacion {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.3s ease-in-out, opacity 0.3s linear;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s linear, height 0.5s linear;
+  height: 0;
 }
 @media (min-width: 768px) {
   .navegacion {
@@ -543,6 +612,7 @@ template {
   flex-direction: column;
   visibility: visible;
   opacity: 1;
+  height: auto;
 }
 @media (min-width: 768px) {
   .mostrar {
@@ -583,6 +653,7 @@ template {
 .anuncio {
   background-color: #eeeeee;
   border: 1px solid #c8c8c8;
+  margin-bottom: 2rem;
 }
 .anuncio .contenido-anuncio {
   padding: 2rem;
@@ -761,7 +832,7 @@ template {
 .texto-nosotros blockquote {
   font-weight: 900;
   font-size: 2.2rem;
-  margin: 0;
+  margin: 3rem 0 0 0;
   padding: 1rem 0 3rem 0;
 }
 /*# sourceMappingURL=app.css.map */

@@ -1,18 +1,45 @@
 @use 'base/mixins' as m;
 @use 'base/variables' as v;
 
-.barra{
+.derecha{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 3rem;
 
+    @include m.tablet{ 
+        align-items: flex-end;
+    }
+
+    .dark-mode-boton{
+        width: 3rem;
+        margin: 3rem 0;
+        filter: invert(100%);
+        &:hover{
+            cursor: pointer;
+        }
+
+        @include m.tablet{ 
+            margin-top: 0;
+        }
+    }
+}
+
+.barra{
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    align-items: center;
+    img{
+        width: 20rem;
+        height: 3rem;
+        margin-bottom: 3rem;
+    }
     @include m.tablet{ 
         flex-direction: row;
         justify-content: space-between;
-        
+        align-items: flex-end;
         img{
-            width: auto;
+            width: 30rem;
             height: 3rem;
         }
     }
@@ -21,7 +48,8 @@
 .navegacion{
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.3s ease-in-out,opacity 0.3s linear;
+    transition: visibility 0.3s ease-in-out,opacity 0.3s linear, height 0.5s linear;
+    height: 0;
     @include m.tablet{ 
         display: flex;
         align-items: center;
@@ -61,6 +89,7 @@
     flex-direction: column;
     visibility: visible;
     opacity: 1;
+    height: auto;
     @include m.tablet{ 
         flex-direction: row;
 
