@@ -835,4 +835,16 @@ template {
   margin: 3rem 0 0 0;
   padding: 1rem 0 3rem 0;
 }
+
+.alerta {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+.alerta.error {
+  background-color: rgb(189, 7, 7);
+}
 /*# sourceMappingURL=app.css.map */

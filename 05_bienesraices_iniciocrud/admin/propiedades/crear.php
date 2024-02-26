@@ -4,7 +4,18 @@
     $db = concectardb();
 
 
+    // Arreglo con mensajes de errores
+    $errores = [];
 
+    $titulo = '';
+    $precio = '';
+    $descripcion = '';
+    $habitaciones = '';
+    $wc = '';
+    $estacionamiento = '';
+    $idvendedor = '';
+
+    // Ejecutar el codigo despues de que el user envia el form
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         // echo "<pre>";
         // var_dump($_POST);
@@ -18,14 +29,45 @@
         $estacionamiento = $_POST["estacionamiento"];
         $idvendedor = $_POST["vendedor"];
 
-        // Query
-        $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,idvendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$idvendedor');";
-        $resultado = mysqli_query($db,$query);
-        if($resultado){
-            echo 'Insertado correctamente';
-        }else{
-            echo 'Error. No se inserto';
+        if(!$titulo){
+            $errores [] = 'Debes añadir un titulo';
         }
+        if(!$precio){
+            $errores[] = 'El precio es obligatorio';
+        }
+
+        if(strlen($descripcion) < 10){
+            $errores[] = 'La descripcion es obligatorio y debe contener mas de 10 caracteres';
+        }
+
+        if(!$habitaciones){
+            $errores[] = 'El numero de habitaciones es obligatorio';
+        }
+
+        if(!$wc){
+            $errores[] = 'El numero de baños es obligatorio';
+        }
+
+        if(!$estacionamiento){
+            $errores[] = 'El numero de estacionamientos es obligatorio';
+        }
+
+        if(!$idvendedor){
+            $errores[] = 'Debe de seleccionar un vendedor';
+        }
+
+
+
+        if(empty($errores)){
+            $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,idvendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$idvendedor');";
+            $resultado = mysqli_query($db,$query);
+            if($resultado){
+                echo 'Insertado correctamente';
+            }
+        }
+
+        // Query
+        
     }
 
     
@@ -36,39 +78,45 @@
         <h1>Crear</h1>
         <a href="/admin/" class="boton boton-verde">Volver</a>
 
+        <?php foreach($errores as $error):?>
+            <div class="alerta error">
+                <?php echo $error?>
+            </div>
+        <?php endforeach;?>
+
         <form class="formulario" method="POST" action="/admin/propiedades/crear.php">
             <fieldset>
                 <legend>Información general de nuestra propiedad</legend>
                 <label for="titulo">Titulo:</label>
-                <input name="titulo" type="text" id="titulo" placeholder="Titulo propiedad">
+                <input name="titulo" type="text" id="titulo" placeholder="Titulo propiedad" value="<?php echo $titulo; ?>">
 
                 <label for="precio">Precio:</label>
-                <input name="precio" type="number" placeholder="Precio propiedad" id="precio">
+                <input name="precio" type="number" placeholder="Precio propiedad" id="precio" value="<?php echo $precio; ?>">
 
                 <label for="imagen">Imageb:</label>
                 <input type="file" id="imagen" accept="image/jpeg, image/png">
 
                 <label for="descripcion">Descripcion:</label>
-                <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Mi propiedad......"></textarea>
+                <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Mi propiedad......"><?php echo $descripcion; ?></textarea>
             </fieldset>
 
             <fieldset>
                 <legend>Información Propiedad</legend>
 
                 <label for="habitaciones">Habitaciones:</label>
-                <input name="habitaciones" type="number" id="habitaciones" placeholder="Ej: 2" min="1" max="9">
+                <input name="habitaciones" type="number" id="habitaciones" placeholder="Ej: 2" min="1" max="9" value="<?php echo $habitaciones; ?>">
 
                 <label for="wc">Baños:</label>
-                <input name="wc" type="number" id="wc" placeholder="Ej: 2">
+                <input name="wc" type="number" id="wc" placeholder="Ej: 2" value="<?php echo $wc; ?>">
 
                 <label for="estacionamiento">Estacionamiento:</label>
-                <input name="estacionamiento" type="number" placeholder="Ej: 2" id="estacionamiento">
+                <input name="estacionamiento" type="number" placeholder="Ej: 2" id="estacionamiento" value="<?php echo $estacionamiento; ?>">
             </fieldset>
 
             <fieldset>
                 <legend>Vendedor</legend>
 
-                <select name="vendedor" id="">
+                <select name="vendedor" >
                     <option value="" disabled selected> -- Seleccionar -- </option>
                     <option value="1">Juan</option>
                     <option value="2">Karen</option>
