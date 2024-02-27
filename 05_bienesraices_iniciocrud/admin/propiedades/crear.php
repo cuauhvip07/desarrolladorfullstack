@@ -2,6 +2,10 @@
     //base de datos
     require '../../includes/config/database.php';
     $db = concectardb();
+    
+    // Consultar para tener los vendedores;
+    $consulta = "SELECT * FROM vendedores;";
+    $resultado = mysqli_query($db,$consulta);
 
 
     // Arreglo con mensajes de errores
@@ -14,6 +18,7 @@
     $wc = '';
     $estacionamiento = '';
     $idvendedor = '';
+    $creado = date('Y/m/d');
 
     // Ejecutar el codigo despues de que el user envia el form
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -59,10 +64,11 @@
 
 
         if(empty($errores)){
-            $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,idvendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$idvendedor');";
+            $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,creado,idvendedor) VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$idvendedor');";
             $resultado = mysqli_query($db,$query);
             if($resultado){
-                echo 'Insertado correctamente';
+                // Redireccionar al usuario 
+                header('Location: /admin');
             }
         }
 
@@ -93,7 +99,7 @@
                 <label for="precio">Precio:</label>
                 <input name="precio" type="number" placeholder="Precio propiedad" id="precio" value="<?php echo $precio; ?>">
 
-                <label for="imagen">Imageb:</label>
+                <label for="imagen">Imagen:</label>
                 <input type="file" id="imagen" accept="image/jpeg, image/png">
 
                 <label for="descripcion">Descripcion:</label>
@@ -118,8 +124,9 @@
 
                 <select name="vendedor" >
                     <option value="" disabled selected> -- Seleccionar -- </option>
-                    <option value="1">Juan</option>
-                    <option value="2">Karen</option>
+                    <?php while($row = mysqli_fetch_assoc($resultado)): ?>
+                        <option <?php echo $idvendedor === $row['id']? 'selected' : ''; ?> value="<?php echo $row['id'];?>"> <?php echo $row['nombre']." ".$row['apellido']; ?> </option>
+                    <?php endwhile; ?>
                 </select>
             </fieldset>
 
