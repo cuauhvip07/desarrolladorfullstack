@@ -26,6 +26,13 @@
         // var_dump($_POST);
         // echo "</pre>";
 
+        // echo "<pre>";
+        // var_dump($_FILES);
+        // echo "</pre>";
+
+        // Asignar files hacia una variables
+        $imagen = $_FILES['imagen'];
+
         $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
         $precio = mysqli_real_escape_string($db, $_POST["precio"]);
         $descripcion = mysqli_real_escape_string($db, $_POST["descripcion"]);
@@ -61,6 +68,16 @@
             $errores[] = 'Debe de seleccionar un vendedor';
         }
 
+        if(!$imagen['name'] || $imagen['error']){
+            $errores[] = 'La imagen es obligatoria';
+        }
+
+        // Validar por tamaño (100 kb maximo )
+        $medida = 1000 * 100;
+        if($imagen['size'] > $medida){
+            $errores[] = 'La imagen es muy pesada';
+        }
+
 
 
         if(empty($errores)){
@@ -90,7 +107,7 @@
             </div>
         <?php endforeach;?>
 
-        <form class="formulario" method="POST" action="/admin/propiedades/crear.php">
+        <form class="formulario" method="POST" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
             <fieldset>
                 <legend>Información general de nuestra propiedad</legend>
                 <label for="titulo">Titulo:</label>
@@ -100,7 +117,7 @@
                 <input name="precio" type="number" placeholder="Precio propiedad" id="precio" value="<?php echo $precio; ?>">
 
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png">
+                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
 
                 <label for="descripcion">Descripcion:</label>
                 <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Mi propiedad......"><?php echo $descripcion; ?></textarea>
