@@ -17,7 +17,7 @@
     $habitaciones = '';
     $wc = '';
     $estacionamiento = '';
-    $idvendedor = '';
+    $idvendedor = '' ?? null;
     $creado = date('Y/m/d');
 
     // Ejecutar el codigo despues de que el user envia el form
@@ -39,7 +39,7 @@
         $habitaciones = mysqli_real_escape_string($db, $_POST["habitaciones"]);
         $wc = mysqli_real_escape_string($db, $_POST["wc"]);
         $estacionamiento = mysqli_real_escape_string($db, $_POST["estacionamiento"]);
-        $idvendedor = mysqli_real_escape_string($db, $_POST["vendedor"]);
+        $idvendedor = mysqli_real_escape_string($db, $_POST["vendedor"] ?? 0);
 
         if(!$titulo){
             $errores [] = 'Debes añadir un titulo';
@@ -106,7 +106,7 @@
             $resultado = mysqli_query($db,$query);
             if($resultado){
                 // Redireccionar al usuario 
-                header('Location: /admin');
+                header('Location: /admin?resultado=1');
             }
         }
 
