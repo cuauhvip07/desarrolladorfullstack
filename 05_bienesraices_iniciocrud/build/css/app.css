@@ -904,4 +904,8 @@ table.propiedades thead th {
 table.propiedades .imagen-tabla {
   width: 10rem;
 }
+
+.imagen-small {
+  width: 30rem;
+}
 /*# sourceMappingURL=app.css.map */
