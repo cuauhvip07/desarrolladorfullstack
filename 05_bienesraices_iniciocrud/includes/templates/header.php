@@ -22,10 +22,10 @@
                 <div class="derecha">
                     <img class="dark-mode-boton" src="/build/img/dark-mode.svg" alt="dark-mode">
                     <nav class="navegacion">
-                        <a href="nosotros.php">Nosotros</a>
-                        <a href="anuncios.php">Anuncios</a>
-                        <a href="blog.php">Blog</a>
-                        <a href="contacto.php">Contacto</a>
+                        <a href="../../nosotros.php">Nosotros</a>
+                        <a href="../../anuncios.php">Anuncios</a>
+                        <a href="../../blog.php">Blog</a>
+                        <a href="../../contacto.php">Contacto</a>
                     </nav>
                 </div>
 
