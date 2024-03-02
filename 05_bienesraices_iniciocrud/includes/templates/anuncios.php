@@ -1,7 +1,7 @@
 <?php 
     require __DIR__.'/../config/database.php';
 
-    $db = concectardb();
+    $db = conectardb();
 
     // query
     $query = "SELECT * FROM propiedades LIMIT {$limite};";

@@ -1,7 +1,7 @@
 <?php 
     // Importar la conexion 
     require '../includes/config/database.php';
-    $db = concectardb();
+    $db = conectardb();
 
     // Creacion del query
     $query = 'SELECT * FROM propiedades';

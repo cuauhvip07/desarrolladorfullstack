@@ -3,7 +3,7 @@
     $id = $_GET['id'];
 
     // Conexion de la bd
-    $db = concectardb();
+    $db = conectardb();
 
     // Query
     $query = "SELECT * FROM propiedades WHERE id = {$id};";

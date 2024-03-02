@@ -9,7 +9,7 @@
 
     //base de datos
     require '../../includes/config/database.php';
-    $db = concectardb();
+    $db = conectardb();
 
     // Obtener los datos de la propiedad;
     $consulta = "SELECT * FROM propiedades WHERE id={$id}";

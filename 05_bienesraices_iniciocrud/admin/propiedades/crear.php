@@ -1,7 +1,7 @@
 <?php 
     //base de datos
     require '../../includes/config/database.php';
-    $db = concectardb();
+    $db = conectardb();
     
     // Consultar para tener los vendedores;
     $consulta = "SELECT * FROM vendedores;";
