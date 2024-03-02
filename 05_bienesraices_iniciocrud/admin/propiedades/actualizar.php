@@ -1,4 +1,10 @@
 <?php 
+    require '../../includes/funciones.php';
+    // Checar que haya hecho el logging;
+    $auth = estadoAutenticado();
+    if(!$auth){
+        header('Location: /');
+    }
     // Validar que sea un Id valido
     $id = $_GET['id'];
     $id = filter_var($id,FILTER_VALIDATE_INT);
@@ -132,7 +138,7 @@
     }
 
     
-    require '../../includes/funciones.php';
+    
     incluirTemplate('header');
 ?>
     <main class="contenedor seccion">

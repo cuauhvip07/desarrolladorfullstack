@@ -7,7 +7,6 @@ require 'includes/config/database.php';
 
     // Autentica usuario
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        var_dump($_POST);
 
         $email = mysqli_real_escape_string( $db, filter_var($_POST['email'],FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db,$_POST['password']);
@@ -21,7 +20,34 @@ require 'includes/config/database.php';
 
         
         if(empty($errores)){
+            // Revisar si el usuario existe;
+            $query = "SELECT * FROM usuarios WHERE email = '{$email}';";
+            $resultado = mysqli_query($db,$query);
             
+            // Saber si el usuario existe
+            if($resultado -> num_rows){
+                // Revisar si el password es correcto
+                $usuario = mysqli_fetch_assoc($resultado);
+                // Verificar si el password es correcto o no 
+                $auth = password_verify($password,$usuario['password']);
+                
+                if($auth){
+                    // El usuario esta autenticado
+                    session_start();
+
+                    // Llenar el arreglo de la sesion
+                    $_SESSION['usuario'] = $usuario['email'];
+                    $_SESSION['loging'] = true;
+                    echo "<pre>";
+                    var_dump($_SESSION);
+                    echo "</pre>";
+                }else{
+                    $errores[] = 'La contraseña es incorrecta';
+                }
+
+            }else{
+                $errores [] = 'El usuario no existe';
+            }
         }
     }
 
@@ -39,7 +65,7 @@ require 'includes/config/database.php';
             </div>
         <?php endforeach;?>
         
-        <form action="" class="formulario" method="POST" novalidate>
+        <form action="" class="formulario" method="POST">
         <fieldset>
                 <legend>Email y Password</legend>
 

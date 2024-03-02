@@ -1,4 +1,12 @@
-<?php 
+<?php
+    // Autenticacion 
+    require '../../includes/funciones.php';
+    // Checar que haya hecho el logging;
+    $auth = estadoAutenticado();
+    if(!$auth){
+        header('Location: /');
+    }
+
     //base de datos
     require '../../includes/config/database.php';
     $db = conectardb();
@@ -114,8 +122,6 @@
         
     }
 
-    
-    require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>
     <main class="contenedor seccion">
