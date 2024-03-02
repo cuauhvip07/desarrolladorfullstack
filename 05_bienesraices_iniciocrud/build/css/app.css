@@ -376,6 +376,10 @@ template {
   justify-content: flex-end;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 .boton-amarillo-block {
   background-color: #E08709;
   color: #FFFFFF;
@@ -438,6 +442,7 @@ template {
   display: block;
   transition: background-color 0.5s ease;
   border: none;
+  width: 100%;
 }
 .boton-rojo-block:hover {
   background-color: #a40606;
