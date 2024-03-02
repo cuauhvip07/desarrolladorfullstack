@@ -38,9 +38,7 @@ require 'includes/config/database.php';
                     // Llenar el arreglo de la sesion
                     $_SESSION['usuario'] = $usuario['email'];
                     $_SESSION['loging'] = true;
-                    echo "<pre>";
-                    var_dump($_SESSION);
-                    echo "</pre>";
+                    header('Location: /admin');
                 }else{
                     $errores[] = 'La contraseña es incorrecta';
                 }
