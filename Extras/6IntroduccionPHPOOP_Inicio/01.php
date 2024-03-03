@@ -13,12 +13,18 @@ class Producto{
         // $this -> precio = $precio;
         // $this -> disponible = $diponible;
     }
+
+    public function mostrarProducto(){
+        echo "El producto es: ".$this -> nombre." y su precio es de: ".$this -> precio;
+    }
 }
 
 $producto = new Producto('Tablet',200,true);
 // $producto -> nombre = 'Comida';
 // $producto -> precio = 200;    Manera para poder llenar info
 // $producto -> disponible = true;
+
+$producto -> mostrarProducto();
 
 echo "<pre>";
 var_dump($producto -> nombre);
