@@ -4,7 +4,6 @@
     use App\Propiedad;
     
     // Checar que haya hecho el logging;
-    $auth = estadoAutenticado();
     estadoAutenticado();
 
     //base de datos
@@ -29,13 +28,10 @@
 
     // Ejecutar el codigo despues de que el user envia el form
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
 
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "</pre>";
+        $propiedad = new Propiedad($_POST);
+        $propiedad -> guardar();
+        
 
         // Asignar files hacia una variables
         $imagen = $_FILES['imagen'];
@@ -109,7 +105,7 @@
             move_uploaded_file($imagen['tmp_name'],$carperaImagenes.$nombreImgen); 
 
             // Insersion a la base da datos
-            $query = "INSERT INTO propiedades (titulo,precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,idvendedor) VALUES ('$titulo','$precio','$nombreImgen','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$idvendedor');";
+            
             $resultado = mysqli_query($db,$query);
             if($resultado){
                 // Redireccionar al usuario 
@@ -165,7 +161,7 @@
             <fieldset>
                 <legend>Vendedor</legend>
 
-                <select name="vendedor" >
+                <select name="idvendedor" >
                     <option value="" disabled selected> -- Seleccionar -- </option>
                     <?php while($row = mysqli_fetch_assoc($resultado)): ?>
                         <option <?php echo $idvendedor === $row['id']? 'selected' : ''; ?> value="<?php echo $row['id'];?>"> <?php echo $row['nombre']." ".$row['apellido']; ?> </option>
