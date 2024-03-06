@@ -1,8 +1,7 @@
 <?php
     // Creacion de un usuario y hasheo del mismo
 
-    // Importar la conexion
-    require 'includes/config/database.php';
+    require 'includes/app.php';
 
     $db = conectardb();
 

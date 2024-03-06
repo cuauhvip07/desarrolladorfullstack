@@ -1,6 +1,7 @@
 <?php 
-    require 'includes/config/database.php';
+
     $id = $_GET['id'];
+    require 'includes/app.php';
 
     // Conexion de la bd
     $db = conectardb();
@@ -13,7 +14,7 @@
     
 
 
-    require 'includes/funciones.php';
+
     incluirTemplate('header');
 ?>
 
