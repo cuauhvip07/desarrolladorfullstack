@@ -1,14 +1,13 @@
 <?php
     // Autenticacion 
-    require '../../includes/funciones.php';
+    require '../../includes/app.php';
+    use App\Propiedad;
+    
     // Checar que haya hecho el logging;
     $auth = estadoAutenticado();
-    if(!$auth){
-        header('Location: /');
-    }
+    estadoAutenticado();
 
     //base de datos
-    require '../../includes/config/database.php';
     $db = conectardb();
     
     // Consultar para tener los vendedores;
