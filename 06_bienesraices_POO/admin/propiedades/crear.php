@@ -2,6 +2,11 @@
     // Autenticacion 
     require '../../includes/app.php';
     use App\Propiedad;
+    use Intervention\Image\ImageManager ;
+    $imageManager = new ImageManager();
+
+    
+    
     
     // Checar que haya hecho el logging;
     estadoAutenticado();
@@ -15,7 +20,8 @@
 
 
     // Arreglo con mensajes de errores
-    $errores = [];
+    $errores = Propiedad::getErrores();
+    // debuggear($errores);
 
     $titulo = '';
     $precio = '';
@@ -28,85 +34,45 @@
 
     // Ejecutar el codigo despues de que el user envia el form
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
-
+        // Crea una nueva instancia
         $propiedad = new Propiedad($_POST);
-        $propiedad -> guardar();
+
         
 
-        // Asignar files hacia una variables
-        $imagen = $_FILES['imagen'];
+        //Genera un nombre unico 
+        // md5 -> Crea un hash estatico    rand -> Hace que sea aleatorio  
+        //uniqid -> Unico
+        $nombreImgen = md5(uniqid(rand(),true)).".jpg"; 
 
-        $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
-        $precio = mysqli_real_escape_string($db, $_POST["precio"]);
-        $descripcion = mysqli_real_escape_string($db, $_POST["descripcion"]);
-        $habitaciones = mysqli_real_escape_string($db, $_POST["habitaciones"]);
-        $wc = mysqli_real_escape_string($db, $_POST["wc"]);
-        $estacionamiento = mysqli_real_escape_string($db, $_POST["estacionamiento"]);
-        $idvendedor = mysqli_real_escape_string($db, $_POST["vendedor"] ?? 0);
+        // Subir la imagen 
+        // Realiza un resize a la imagen con intervetion
+        if($_FILES['imagen']['tmp_name']){
+            $image = $imageManager->make($_FILES['imagen']['tmp_name'])->fit(800,600);
+            $propiedad->setImagen($nombreImgen);
+        }
+        
 
-        if(!$titulo){
-            $errores [] = 'Debes añadir un titulo';
-        }
-        if(!$precio){
-            $errores[] = 'El precio es obligatorio';
-        }
 
-        if(strlen($descripcion) < 10){
-            $errores[] = 'La descripcion es obligatorio y debe contener mas de 10 caracteres';
-        }
-
-        if(!$habitaciones){
-            $errores[] = 'El numero de habitaciones es obligatorio';
-        }
-
-        if(!$wc){
-            $errores[] = 'El numero de baños es obligatorio';
-        }
-
-        if(!$estacionamiento){
-            $errores[] = 'El numero de estacionamientos es obligatorio';
-        }
-
-        if(!$idvendedor){
-            $errores[] = 'Debe de seleccionar un vendedor';
-        }
-
-        if(!$imagen['name'] || $imagen['error']){
-            $errores[] = 'La imagen es obligatoria';
-        }
-
-        // Validar por tamaño (1000 kb = 1mb maximo )
-        $medida = 1000 * 1000;
-        if($imagen['size'] > $medida){
-            $errores[] = 'La imagen es muy pesada';
-        }
+        $errores = $propiedad->validar();
+       
 
 
 
         if(empty($errores)){
-            /* Subida de archivos */
 
+           
             // Crear carpeta
-            $carperaImagenes = '../../imagenes/';
             // is_dir saber si hay una carpeta o no 
-            if(!is_dir($carperaImagenes)){ 
+            if(!is_dir(CARPETA_IMAGENES)){ 
                 // mkdir crea una carpeta
-                mkdir($carperaImagenes); 
+                mkdir(CARPETA_IMAGENES); 
             }
+            $image->save(CARPETA_IMAGENES.$nombreImgen);
 
-            //Genera un nombre unico 
-            // md5 -> Crea un hash estatico    rand -> Hace que sea aleatorio  
-            //uniqid -> Unico
-            $nombreImgen = md5(uniqid(rand(),true)).".jpg"; 
-            var_dump($nombreImgen);
+            // Guarda en la base de datos
+            $resultado = $propiedad -> guardar();
 
-            // Subir la imagen 
-            // Mueve el archivo de la memoria hacia la carpeta
-            move_uploaded_file($imagen['tmp_name'],$carperaImagenes.$nombreImgen); 
-
-            // Insersion a la base da datos
-            
-            $resultado = mysqli_query($db,$query);
+            // Mensaje de exito o erro
             if($resultado){
                 // Redireccionar al usuario 
                 header('Location: /admin?resultado=1');
