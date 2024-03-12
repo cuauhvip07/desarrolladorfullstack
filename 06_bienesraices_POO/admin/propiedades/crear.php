@@ -21,21 +21,12 @@
 
     // Arreglo con mensajes de errores
     $errores = Propiedad::getErrores();
-    // debuggear($errores);
-
-    $titulo = '';
-    $precio = '';
-    $descripcion = '';
-    $habitaciones = '';
-    $wc = '';
-    $estacionamiento = '';
-    $idvendedor = '' ?? null;
-    $creado = date('Y/m/d');
-
+    $propiedad = new Propiedad;
     // Ejecutar el codigo despues de que el user envia el form
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
+        
         // Crea una nueva instancia
-        $propiedad = new Propiedad($_POST);
+        $propiedad = new Propiedad($_POST['propiedad']);
 
         
 
@@ -46,8 +37,8 @@
 
         // Subir la imagen 
         // Realiza un resize a la imagen con intervetion
-        if($_FILES['imagen']['tmp_name']){
-            $image = $imageManager->make($_FILES['imagen']['tmp_name'])->fit(800,600);
+        if($_FILES['propiedad']['tmp_name']['imagen']){
+            $image = $imageManager->make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
             $propiedad->setImagen($nombreImgen);
         }
         
@@ -96,44 +87,7 @@
         <?php endforeach;?>
 
         <form class="formulario" method="POST" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Información general de nuestra propiedad</legend>
-                <label for="titulo">Titulo:</label>
-                <input name="titulo" type="text" id="titulo" placeholder="Titulo propiedad" value="<?php echo $titulo; ?>">
-
-                <label for="precio">Precio:</label>
-                <input name="precio" type="number" placeholder="Precio propiedad" id="precio" value="<?php echo $precio; ?>">
-
-                <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
-
-                <label for="descripcion">Descripcion:</label>
-                <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Mi propiedad......"><?php echo $descripcion; ?></textarea>
-            </fieldset>
-
-            <fieldset>
-                <legend>Información Propiedad</legend>
-
-                <label for="habitaciones">Habitaciones:</label>
-                <input name="habitaciones" type="number" id="habitaciones" placeholder="Ej: 2" min="1" max="9" value="<?php echo $habitaciones; ?>">
-
-                <label for="wc">Baños:</label>
-                <input name="wc" type="number" id="wc" placeholder="Ej: 2" value="<?php echo $wc; ?>">
-
-                <label for="estacionamiento">Estacionamiento:</label>
-                <input name="estacionamiento" type="number" placeholder="Ej: 2" id="estacionamiento" value="<?php echo $estacionamiento; ?>">
-            </fieldset>
-
-            <fieldset>
-                <legend>Vendedor</legend>
-
-                <select name="idvendedor" >
-                    <option value="" disabled selected> -- Seleccionar -- </option>
-                    <?php while($row = mysqli_fetch_assoc($resultado)): ?>
-                        <option <?php echo $idvendedor === $row['id']? 'selected' : ''; ?> value="<?php echo $row['id'];?>"> <?php echo $row['nombre']." ".$row['apellido']; ?> </option>
-                    <?php endwhile; ?>
-                </select>
-            </fieldset>
+            <?php include '../../includes/templates/formulario_propiedades.php';?>
 
             <input type="submit" value="Crear propiedad" class="boton boton-verde">
         </form>

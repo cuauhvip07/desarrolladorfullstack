@@ -5,7 +5,6 @@
 
     // Implemenatr metodo para obtener todas las proiedades;
     $propiedades = Propiedad::all();
-    debuggear($propiedades);
     // Muestra un mensaje condional
     $resultado = $_GET['resultado'] ?? null;
 
@@ -54,21 +53,22 @@
                 </tr>
             </thead>
             <tbody>
-                <?php while($row = mysqli_fetch_assoc($consulta)):?>
+                <?php foreach ($propiedades as $propiedad): ?>
+
                 <tr class="centrar">
-                    <td><?php echo $row['id'];?></td>
-                    <td><?php echo $row['titulo'];?></td>
-                    <td> <img src="/imagenes/<?php echo $row['imagen'];?>" class="imagen-tabla"></td>
-                    <td>$<?php echo $row['precio'];?></td>
+                    <td><?php echo $propiedad->id ;?></td>
+                    <td><?php echo $propiedad->titulo;?></td>
+                    <td> <img src="/imagenes/<?php echo $propiedad->imagen;?>" class="imagen-tabla"></td>
+                    <td>$<?php echo $propiedad->precio;?></td>
                     <td>
                         <form action="" class="w-100" method="POST">
-                            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+                            <input type="hidden" name="id" value="<?php echo$propiedad->id;?>">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="../admin/propiedades/actualizar.php?id=<?php echo $row['id'] ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="../admin/propiedades/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
-                <?php endwhile;?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </main>
