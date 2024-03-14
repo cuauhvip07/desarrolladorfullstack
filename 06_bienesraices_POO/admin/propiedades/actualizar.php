@@ -10,11 +10,13 @@ $imageManager = new ImageManager();
     $id = $_GET['id'];
     $id = filter_var($id,FILTER_VALIDATE_INT);
     
+    
     if(!$id){
         header('Location: /admin');
     }
 
     $propiedad = Propiedad::find($id);
+    
 
     // Arreglo con mensajes de errores
     $errores = Propiedad::getErrores();
@@ -24,6 +26,7 @@ $imageManager = new ImageManager();
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         // Asignar los atributos
         $args = $_POST['propiedad'];
+        
         
         $propiedad->sincronizar($args);
         // Validacion 
