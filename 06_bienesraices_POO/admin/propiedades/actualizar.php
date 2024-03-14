@@ -33,17 +33,20 @@ $imageManager = new ImageManager();
         $errores = $propiedad->validar();
 
         // Subida de archivos
-        $nombreImgen = md5(uniqid(rand(),true)).".jpg"; 
+        $nombreImagen = md5(uniqid(rand(),true)).".jpg"; 
         if($_FILES['propiedad']['tmp_name']['imagen']){
             $image = $imageManager->make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
-            $propiedad->setImagen($nombreImgen);
+            $propiedad->setImagen($nombreImagen);
         }
 
 
-        if(empty($errores)){
-            $image->save(CARPETA_IMAGENES.$nombreImgen);
-            $resultado = $propiedad->guardar();
-
+        if(empty($errores)) {
+            //Almacenar la imagen
+            if(isset($image)) {
+                $image ->save(CARPETA_IMAGENES.$nombreImagen);
+            }
+            //Guardar los datos de la propiedad
+            $propiedad->guardar();
         }
 
     }

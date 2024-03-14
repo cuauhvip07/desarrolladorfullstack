@@ -3,7 +3,7 @@
     estadoAutenticado();
     use App\Propiedad;
 
-    // Implemenatr metodo para obtener todas las proiedades;
+    // Implemenatr metodo para obtener todas las proiedades junto con el id;
     $propiedades = Propiedad::all();
     // Muestra un mensaje condional
     $resultado = $_GET['resultado'] ?? null;
