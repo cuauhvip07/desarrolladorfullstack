@@ -2,6 +2,7 @@
     // Autenticacion 
     require '../../includes/app.php';
     use App\Propiedad;
+    use App\Vendedor;
     use Intervention\Image\ImageManager ;
     $imageManager = new ImageManager();
 

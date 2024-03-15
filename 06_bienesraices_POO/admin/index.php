@@ -2,9 +2,12 @@
     require '../includes/app.php';
     estadoAutenticado();
     use App\Propiedad;
+    use App\Vendedor;
 
     // Implemenatr metodo para obtener todas las proiedades junto con el id;
     $propiedades = Propiedad::all();
+    $vendedor = Vendedor::all();
+    debuggear($vendedor);
     // Muestra un mensaje condional
     $resultado = $_GET['resultado'] ?? null;
 
