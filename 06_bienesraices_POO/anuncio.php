@@ -1,16 +1,16 @@
 <?php 
-
-    $id = $_GET['id'];
     require 'includes/app.php';
-
-    // Conexion de la bd
-    $db = conectardb();
-
-    // Query
-    $query = "SELECT * FROM propiedades WHERE id = {$id};";
+    use App\Propiedad;
+    $id = $_GET['id'];
     
-    // Insersion del query
-    $resultado = mysqli_query($db,$query);
+
+    if(!$id){
+        header('Location: /');
+    }
+
+    $propiedad = Propiedad::find($id);
+    
+
     
 
 
@@ -19,33 +19,31 @@
 ?>
 
     <main class="contenedor seccion contenido-centrado">
-    <?php while($row = mysqli_fetch_assoc($resultado)):?>
-        <h1><?php echo $row['titulo'];?></h1>
+        <h1><?php echo $propiedad->titulo;?></h1>
 
-        <img loading="lazy" src="/imagenes/<?php echo $row['imagen'];?>" alt="Imagen anuncio" width="500" height="300">
+        <img loading="lazy" src="/imagenes/<?php echo $propiedad->imagen;?>" alt="Imagen anuncio" width="500" height="300">
 
         <div class="resumen-propiedad">
-            <p class="precio">$<?php echo $row['precio'];?></p>
+            <p class="precio">$<?php echo $propiedad->precio;?></p>
             <ul class="iconos-caracteristicas">
                 <li>
                     <img class="icono" src="build/img/icono_wc.svg" alt="Icono wc" loading="lazy">
-                    <p><?php echo $row['wc'];?></p>
+                    <p><?php echo $propiedad->wc;?></p>
                 </li>
 
                 <li>
                     <img class="icono" src="build/img/icono_estacionamiento.svg" alt="Icono estacionamiento" loading="lazy">
-                    <p><?php echo $row['estacionamiento']?></p>
+                    <p><?php echo $propiedad->estacionamiento;?></p>
                 </li>
 
                 <li>
                     <img class="icono" src="build/img/icono_dormitorio.svg" alt="Icono dormitorio" loading="lazy">
-                    <p><?php echo $row['habitaciones'];?></p>
+                    <p><?php echo $propiedad->habitaciones;?></p>
                 </li>
             </ul>
-            <p><?php echo $row['descripcion'];?></>
+            <p><?php echo $propiedad->descripcion;?></>
             
         </div>
-    <?php endwhile;?>
     </main>
 
 <?php    incluirTemplate('footer'); ?>

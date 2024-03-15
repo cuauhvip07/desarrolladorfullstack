@@ -115,6 +115,14 @@ class ActiveRecord{
         return static::$errores;
     }
 
+    // Obtiene determinado numero de registro
+
+    public static function get($cantidad){
+        $query = "SELECT * FROM ". static::$tabla." LIMIT ".$cantidad;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // Listar todas las propiedades;
     public static function all(){
         $query = "SELECT * FROM ". static::$tabla;
