@@ -10,16 +10,29 @@
     
     // Muestra un mensaje condional
     $resultado = $_GET['resultado'] ?? null;
-
+    
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        debuggear($_POST);
         $id = $_POST['id'];
         $id = filter_var($id,FILTER_VALIDATE_INT);
         
         if($id){
 
-            $propiedad = Propiedad::find($id);
-            $propiedad->eliminar();
+            $tipo = $_POST['tipo'];
+            
+            if(validarTipoContenido($tipo)){
+                // Compara lo que vamos a eliminar
+                if($tipo === 'vendedor'){
+                    $vendedor = Vendedor::find($id);
+                    $vendedor->eliminar();
+                }elseif($tipo === 'propiedad'){
+                    $propiedad = Propiedad::find($id);
+                    $propiedad->eliminar();
+                }
+            }
+
+            
+
+            
         }
     }
     // Se trae el template de las paginas
@@ -27,14 +40,15 @@
 ?>
     <main class="contenedor seccion">
         <h1>Administrador Bienes Raices</h1>
-        <?php if($resultado == 1):?>
-            <p class="alerta exito">Anuncio creado correctamente</p>
-        <?php elseif($resultado == 2):?>
-            <p class="alerta exito">Anuncio Actualizado correctamente</p>
-        <?php elseif($resultado == 3):?>
-            <p class="alerta exito">Anuncio Eliminado correctamente</p>
-        <?php endif;?>
+         <?php
+            $mensaje = mostrarNotificacion(intval($resultado));
+            
+            if($mensaje){ ?>
+                <p class="alerta exito"><?php echo s($mensaje);?></p>
+            <?php }?>
+        
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+        <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
 
         <h2>Propiedades</h2>
 
@@ -59,6 +73,7 @@
                     <td>
                         <form action="" class="w-100" method="POST">
                             <input type="hidden" name="id" value="<?php echo$propiedad->id;?>">
+                            <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
                         <a href="../admin/propiedades/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
@@ -89,9 +104,10 @@
                     <td>
                         <form action="" class="w-100" method="POST">
                             <input type="hidden" name="id" value="<?php echo$vendedor->id;?>">
+                            <input type="hidden" name="tipo" value="vendedor">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="../admin/vendedores/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="../admin/vendedores/actualizar.php?id=<?php echo $vendedor->id ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
