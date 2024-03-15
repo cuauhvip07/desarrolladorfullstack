@@ -1,3 +1,5 @@
+
+
 <fieldset>
                 <legend>Información general de nuestra propiedad</legend>
                 <label for="titulo">Titulo:</label>
@@ -30,6 +32,19 @@
 
             <fieldset>
                 <legend>Vendedor</legend>
+
+                <label for="vendedor">Vendedor</label>
+                <select name="propiedad[idvendedor]" id="vendedor">
+                <option value="" selected disabled> -- Seleccione --</option>
+                    <?php foreach($vendedores as $vendedor):?>
+                        <option 
+                            <?php 
+                            echo $propiedad->idvendedor === $vendedor->id ? 'selected' : '' ;?>
+                            value="<?php echo s($vendedor->id)?>">
+                            <?php echo s($vendedor->nombre)." ".s($vendedor->apellido);?>
+                        </option>
+                    <?php endforeach;?>
+                </select>
 
                
             </fieldset>

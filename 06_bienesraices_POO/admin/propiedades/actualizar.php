@@ -1,6 +1,7 @@
 <?php
  require '../../includes/app.php';
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManager ;
 $imageManager = new ImageManager();
 
@@ -16,6 +17,8 @@ $imageManager = new ImageManager();
     }
 
     $propiedad = Propiedad::find($id);
+    
+    $vendedores = Vendedor::all();
     
 
     // Arreglo con mensajes de errores
@@ -42,7 +45,7 @@ $imageManager = new ImageManager();
 
         if(empty($errores)) {
             //Almacenar la imagen
-            if(isset($image)) {
+            if ($_FILES['propiedad']['tmp_name']['imagen']){
                 $image ->save(CARPETA_IMAGENES.$nombreImagen);
             }
             //Guardar los datos de la propiedad

@@ -6,23 +6,18 @@
     use Intervention\Image\ImageManager ;
     $imageManager = new ImageManager();
 
-    
-    
-    
     // Checar que haya hecho el logging;
     estadoAutenticado();
 
-    //base de datos
-    $db = conectardb();
-    
-    // Consultar para tener los vendedores;
-    $consulta = "SELECT * FROM vendedores;";
-    $resultado = mysqli_query($db,$consulta);
+    $propiedad = new Propiedad;
 
+    // Consulta para obtener todos los vendedores
+    $vendedores = Vendedor::all();
+    
 
     // Arreglo con mensajes de errores
     $errores = Propiedad::getErrores();
-    $propiedad = new Propiedad;
+   
     // Ejecutar el codigo despues de que el user envia el form
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         
