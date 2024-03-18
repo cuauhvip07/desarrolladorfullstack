@@ -35,7 +35,17 @@ class Router{
     }
 
     // Muestra una vista
-    public function view($vista){
+    public function view($vista, $datos = []){
+        foreach($datos as $key=>$value){
+            // El doble $$ significa que se van a pasar muchos datos
+            $$key = $value;
+        }
+        // Alamacenar los siguientes datos en memoria por un momento
+        ob_start();
         include __DIR__."/views/$vista.php";
+
+        // Obtenemos la info del buffer y despues se elimina
+        $contenido = ob_get_clean();
+        include __DIR__.'/views/layaout.php';
     }
 }
