@@ -22,6 +22,12 @@ class PropiedadController{
     public static function crear(Router $router){
         $propiedad = new Propiedad;
         $vendedores = Vendedor::all();
+
+        if($_SERVER["REQUEST_METHOD"] === 'POST'){
+            debuggear('Hola');
+        }    
+
+
         $router->view('propiedades/crear',[
             'propiedad'=>$propiedad,
             'vendedores'=>$vendedores

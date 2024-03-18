@@ -12,6 +12,10 @@ class Router{
         $this->rutasGET[$url] = $fn;
     }
 
+    public function post($url,$fn){
+        $this->rutasPOST[$url] = $fn;
+    }
+
 
     public function comprobarRutas(){
         // Nos da las extensiones de las paginas
@@ -22,7 +26,10 @@ class Router{
         if($metodo === 'GET'){
             // Guardamos en fn la informacion de la url
             $fn = $this->rutasGET[$urlActual] ?? null;
+        }else{
+            $fn = $this->rutasPOST[$urlActual] ?? null;
         }
+
 
         if($fn){
             // La url existe y tiene una funcion asociada
