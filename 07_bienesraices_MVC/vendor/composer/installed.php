@@ -3,7 +3,7 @@
         'name' => 'cuauhtemoc_villalba/06_bienesraices_poo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '50ef758af3faac5fd289c8ec2ad2efc21ddeaa90',
+        'reference' => '9dcaf807175ba68f815ff44fe36efe6d304fc404',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'cuauhtemoc_villalba/06_bienesraices_poo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '50ef758af3faac5fd289c8ec2ad2efc21ddeaa90',
+            'reference' => '9dcaf807175ba68f815ff44fe36efe6d304fc404',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
