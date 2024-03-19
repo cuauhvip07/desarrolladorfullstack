@@ -36,12 +36,12 @@
                 <td> <img src="/imagenes/<?php echo $propiedad->imagen;?>" class="imagen-tabla"></td>
                 <td>$<?php echo $propiedad->precio;?></td>
                 <td>
-                    <form action="" class="w-100" method="POST">
+                    <form class="w-100" method="POST" action="/propiedades/eliminar">
                         <input type="hidden" name="id" value="<?php echo$propiedad->id;?>">
                         <input type="hidden" name="tipo" value="propiedad">
                         <input type="submit" class="boton-rojo-block" value="Eliminar">
                     </form>
-                    <a href="../admin/propiedades/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
+                    <a href="/propiedades/actualizar?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
                 </td>
             </tr>
             <?php endforeach; ?>

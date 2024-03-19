@@ -83,7 +83,69 @@ class PropiedadController{
 
     }
 
-    public static function actualizar(){
-        echo "Metodo actualizar";
+    public static function actualizar(Router $router){
+        $imageManager = new ImageManager();
+        // Checar que haya hecho el logging;
+        estadoAutenticado();
+        // Validar que sea un Id valido
+        $id = validarRedireccionar('/admin');
+
+        $errores = Propiedad::getErrores();
+        $vendedores = Vendedor::all();
+        $propiedad = Propiedad::find($id);
+
+        if($_SERVER["REQUEST_METHOD"] === 'POST'){
+            // Asignar los atributos
+            $args = $_POST['propiedad'];
+            
+            
+            $propiedad->sincronizar($args);
+            // Validacion 
+            $errores = $propiedad->validar();
+    
+            // Subida de archivos
+            $nombreImagen = md5(uniqid(rand(),true)).".jpg"; 
+            if($_FILES['propiedad']['tmp_name']['imagen']){
+                $image = $imageManager->make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+                $propiedad->setImagen($nombreImagen);
+            }
+    
+    
+            if(empty($errores)) {
+                //Almacenar la imagen
+                if ($_FILES['propiedad']['tmp_name']['imagen']){
+                    $image ->save(CARPETA_IMAGENES.$nombreImagen);
+                }
+                //Guardar los datos de la propiedad
+                $propiedad->guardar();
+            }
+    
+        }
+
+        $propiedad = Propiedad::find($id);
+        $router->view('/propiedades/actualizar',[
+            'propiedad' => $propiedad,
+            'errores' => $errores,
+            'vendedores'=>$vendedores
+        ]);
+    }
+
+    public static function eliminar(){
+        if($_SERVER["REQUEST_METHOD"]=== 'POST'){
+            $id = $_POST['id'];
+            $id = filter_var($id,FILTER_VALIDATE_INT);
+        
+            if($id){
+
+                $tipo = $_POST['tipo'];
+                
+                if(validarTipoContenido($tipo)){
+                
+                    $propiedad = Propiedad::find($id);
+                    $propiedad->eliminar();
+                    
+                }
+            }
+        }
     }
 }
