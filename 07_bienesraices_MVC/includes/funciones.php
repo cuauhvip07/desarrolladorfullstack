@@ -52,7 +52,7 @@ function mostrarNotificacion($codigo){
             $mensaje = 'Actualizado correctamente';
             break;
         case 3:
-            $mensaje = 'Creado correctamente';
+            $mensaje = 'Eliminado correctamente';
             break;
         default:
             $mensaje = false;

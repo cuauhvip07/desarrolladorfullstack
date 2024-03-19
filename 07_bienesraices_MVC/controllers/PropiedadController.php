@@ -15,11 +15,13 @@ class PropiedadController{
     // El Router se pone en el metodo para tener viva la referencia del $router declarado en el index de public
     public static function index(Router $router){
         $propiedades = Propiedad::all();
+        $vendedores = Vendedor::all();
         // Muestra un mensaje condional
         $resultado = $_GET['resultado'] ?? null;
         $router->view('propiedades/admin',[
             'propiedades' => $propiedades,
-            'resultado' => $resultado
+            'resultado' => $resultado,
+            'vendedores' => $vendedores
         ]);
     }
 
